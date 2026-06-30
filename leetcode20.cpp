@@ -57,9 +57,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     string s;
-    if(!(cin >> s)) return 0;
+    if(!(cin >> s));
     if(s.length() % 2 != 0) {
-        cout << "false";
+        cout << "false\n";
         return 0;
     }
     stack<char>st;
@@ -68,7 +68,7 @@ int main() {
         else if(ch == '{') st.push('}');
         else if(ch == '[') st.push(']');
         else {
-            if(st.empty() || st.top() != ch) {
+            if(st.empty() || st.top() != 0) {
                 cout << "false\n";
                 return 0;
             }
