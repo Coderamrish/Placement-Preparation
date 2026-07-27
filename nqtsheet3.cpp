@@ -40,6 +40,7 @@ small = nums[i];
             smallest = nums[i];
         }
     }
+    if(smallest == INT_MAX) return -1;
     return smallest;
 }
 int secondLargest(vector<int>& nums) {
@@ -55,6 +56,7 @@ int secondLargest(vector<int>& nums) {
             largest = nums[i];
         }
     }
+    if(largest == INT_MIN) return -1;
     return largest;
 }
 int main() {
