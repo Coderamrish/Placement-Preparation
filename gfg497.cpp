@@ -1,0 +1,67 @@
+/*
+Given two strings s1 and s2. Find the minimum number of steps required to transform string s1 into string s2. The only allowed operation for the transformation is selecting a character from string s1 and inserting it in the beginning of string s1.
+
+If transformation is not possible return -1.
+
+Examples:
+
+Input: s1 = "abd", s2 = "bad"
+Output: 1
+Explanation: The conversion can take place in 1 operation: Pick 'b' and place it at the front.
+Input: s1 = "GeeksForGeeks", s2 = "ForGeeksGeeks"
+Output: 3
+Explanation: The conversion can take place in 3 operations: 
+Pick 'r' and place it at the front.
+s1 = "rGeeksFoGeeks"
+Pick 'o' and place it at the front.
+s1 = "orGeeksFGeeks"
+Pick 'F' and place it at the front.
+s1 = "ForGeeksGeeks"
+Constraints:
+1<= s1.length(), s2.length() <= 104
+*/
+#include <iostream>
+#include <string>
+using namespace std;
+class Solution {
+public:
+    int transform(string &s1, string &s2) {
+        int n = s1.length();
+        if (n != s2.length()) {
+            return -1;
+        }
+        int freq[256] = {0};
+        for (char c : s1) {
+            freq[(unsigned char)c]++;
+        }
+        for (char c : s2) {
+            freq[(unsigned char)c]--;
+        }
+        for (int i = 0; i < 256; i++) {
+            if (freq[i] != 0) {
+                return -1;
+            }
+        }
+        int i = n - 1;
+        int j = n - 1;
+        int ans = 0;
+        while (i >= 0) {
+            if (j >= 0 && s1[i] == s2[j]) {
+                i--;
+                j--;
+            }
+            else {
+                ans++;
+                i--;
+            }
+        }
+        return ans;
+    }
+};
+int main() {
+    Solution obj;
+    string s1, s2;
+    cin >> s1 >> s2;
+    cout << obj.transform(s1, s2) << endl;
+    return 0;
+}
